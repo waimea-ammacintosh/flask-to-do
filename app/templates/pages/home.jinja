@@ -25,9 +25,12 @@
             {% for thing in things %}
 
                 <li>
-                    <a href="/thing/{{ thing.id }}">
-                        <h3>{{ thing.priority }}</h3> {{ thing.name }} 
-                    </a>
+                    <h3>{{ thing.priority }} | {{ thing.name }} | {% if thing.complete %}
+                         <a href="/decomplete/{{thing.id}}">☑</a>
+                    {%else%}
+                         <a href="/complete/{{thing.id}}">☐</a>
+                    {%endif%}</h3> 
+                   
                 </li>
 
             {% else %}
@@ -42,28 +45,32 @@
 
     <article>
 
-        <h3>Add a New Thing...</h3>
+        <h3>Add a New Task...</h3>
 
         <form action="/add" method="POST">
+            <fieldset role="group">
 
-            <input
-                type="text"
-                name="name"
-                placeholder="Name of task"
-                required
-            >
+                 <input
+                     type="text"
+                     name="name"
+                     placeholder="Name of task"
+                     required
+                 >
 
-            <input
-                type="number"
-                name="priority"
-                min="0"
-                placeholder="Priority of task"
-                required
-            >
+                 <select name="priority" placeholder="Select Priority" required>
+                     <option selected disabled value="">
+                         Select Priority
+                     </option>
+                     <option>1</option>
+                     <option>2</option>
+                     <option>3</option>
+                     <option>4</option>
+                     <option>5</option>
+                     </select>
 
 
-            <button>Add the Thing</button>
-
+                 <button>Add</button>
+            </fieldset>
         </form>
 
     </article>
