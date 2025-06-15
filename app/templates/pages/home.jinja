@@ -19,23 +19,38 @@
     <h1>Things...</h1>
 
 
-    <article>
+    <article id="tasks">
 
         <ul>
+            <h2>To-Do</h2>
             {% for thing in things %}
+            {% if thing.complete == 0 %}
 
                 <li>
-                    <h3>{{ thing.priority }} | {{ thing.name }} | {% if thing.complete %}
-                         <a href="/decomplete/{{thing.id}}">☑</a>
-                    {%else%}
+                    <h3>{{ thing.priority }} | {{ thing.name }} | 
                          <a href="/complete/{{thing.id}}">☐</a>
-                    {%endif%}</h3> 
-                   
+                         </h3>
+                  
                 </li>
 
             {% else %}
-
                 <p>None!</p>
+        </ul>
+        <ul>    
+            {% endfor %}
+            <h2>Done</h2>
+            {% for thing in things %}
+            {% if thing.complete %}
+
+                <li>
+                    <h3>{{ thing.priority }} | {{ thing.name }} | 
+                         <a href="/decomplete/{{thing.id}}">🗹</a>
+                    </h3>
+                    <a href="/delete/{{thing.id}}">⊗</a>
+                  
+                </li>
+
+
 
             {% endfor %}
         </ul>

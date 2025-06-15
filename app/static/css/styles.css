@@ -33,3 +33,17 @@
 #messages .message.success { color: var(--pico-ins-color); }
 #messages .message.error   { color: var(--pico-del-color); }
 
+li {
+    padding: 1rem;
+    display: flex;
+}
+
+article #tasks {
+    display: flex;
+    justify-content: justify;
+}
+
+li.a { 
+    align-self: flex-end;
+    padding: 1rem; 
+ } 

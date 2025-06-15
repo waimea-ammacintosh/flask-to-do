@@ -27,7 +27,7 @@ register_error_handlers(app)
 def index():
     with connect_db() as client:
         # Get all the things from the DB
-        sql = "SELECT name, priority, complete FROM tasks ORDER BY priority DESC"
+        sql = "SELECT id, name, priority, complete FROM tasks ORDER BY priority DESC"
         result = client.execute(sql)
         things = result.rows
 
@@ -49,49 +49,60 @@ def add_a_thing():
     priority = html.escape(priority)
 
     with connect_db() as client:
-        # Add the thing to the DB
+        # Add the task to the DB
         sql = "INSERT INTO tasks (name, priority) VALUES (?, ?)"
         values = [name, priority]
         client.execute(sql, values)
 
         # Go back to the home page
-        flash(f"Thing '{name}' added", "success")
+        flash(f"Task '{name}' added", "success")
         return redirect("/")
+
     
 
 #-----------------------------------------------------------
 # Route for completing a task
 #-----------------------------------------------------------
-@app.post("/complete/<int:id>")
+@app.get("/complete/<int:id>")
 def complete_a_task():
 
 
     with connect_db() as client:
-        # Add the thing to the DB
-        complete = connect_db(complete)
-        sql = "UPDATE tasks (complete) VALUES (1)"
-        values = [complete]
-        client.execute(sql, values)
+        sql = "UPDATE tasks SET complete, 1 WHERE id = <int:id>"
+        client.execute(sql)
 
         # Go back to the home page
-        flash("Successfully updated task to completed")
+        flash("Successfully updated task to complete")
         return redirect("/")
     
-    #-----------------------------------------------------------
+#-----------------------------------------------------------
 # Route for decompleting a task
 #-----------------------------------------------------------
-@app.post("/decomplete/<int:id>")
+@app.get("/decomplete/<int:id>")
 def decomplete_a_task():
 
 
     with connect_db() as client:
-        # Add the thing to the DB
-        complete = connect_db(complete)
-        sql = "UPDATE tasks (complete) VALUES (0)"
-        values = [complete]
-        client.execute(sql, values)
+        sql = "UPDATE tasks SET complete, 0 WHERE id = <int:id>"
+        client.execute(sql)
 
         # Go back to the home page
         flash("Successfully updated task to incomplete")
         return redirect("/")
     
+
+
+#-----------------------------------------------------------
+# Route for deleting a thing, Id given in the route
+#-----------------------------------------------------------
+@app.get("/delete/<int:id>")
+def delete_a_thing(id):
+    with connect_db() as client:
+        # Delete the thing from the DB
+        sql = "DELETE FROM things WHERE id=?"
+        params = [id]
+        client.execute(sql, params)
+
+        # Go back to the home page
+        flash("Thing deleted", "success")
+        return redirect("/things")    
