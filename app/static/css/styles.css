@@ -36,15 +36,15 @@
 
 .task  {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     list-style: none;
     gap: 1rem;
     line-height: 1;
-}
+} 
 
-.task .status { 
-    align-self: flex-end;
- } 
+.task.timestamp {
+    color: var(--pico-primary--)
+}
 
  .task .status a { 
     text-decoration: none;
@@ -57,26 +57,30 @@
 .task .name {
     color: var(--pico-primary--);
     font-size: large;
-    font-weight: bold;
     
 }
 
-.task .priority-5 {
+.task.priority {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.task .priority-5 h3 {
     color: var(--pico-color-red-500);
 }
 
-.task .priority-4 {
+.task .priority-4 h3 {
     color: var(--pico-color-orange-500);
 }
 
-.task .priority-3 {
+.task .priority-3 h3 {
     color: var(--pico-color-green-500);
 }
 
-.task .priority-2 {
+.task .priority-2 h3 {
     color: var(--pico-color-blue-500);
 }
 
-.task .priority-1 {
+.task .priority-1 h3 {
     color: var(--pico-color-purple-500);
 }

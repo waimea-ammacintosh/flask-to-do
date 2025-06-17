@@ -26,12 +26,12 @@
             {% for thing in things %}
             {% if thing.complete == 0 %}
                 <li class="task">
-                    <span class="priority priority-{{thing.priority}}">{{ thing.priority }}</span> 
-                    <span class="name">{{ thing.name }}</span>
                     <span class="status">
-                        <a href="/complete/{{thing.id}}">☐</a>
+                        <a href="/complete/{{thing.id}}"><h3>☐</h3></a>
                     </span>
-                  
+                    <span class="priority priority-{{thing.priority}}"><h3>{{ thing.priority }}</h3></span> 
+                    <span class="name"><h3>{{ thing.name }}</h3></span>
+                    <span class="timestamp">{{ thing.timestamp }}</span>                  
                 </li>
             {% endif %}
             {% endfor %}
@@ -46,13 +46,13 @@
             {% if thing.complete %}
 
                 <li class="task">
-                    <span class="priority priority-{{thing.priority}}">{{ thing.priority }}</span> 
-                    <span class="name">{{ thing.name }}</span>
                     <span class="status">
-                        <a href="/decomplete/{{thing.id}}">🗹</a>
+                <a href="/decomplete/{{thing.id}}"><h3>🗹</h3></a>
                     </span>
+                    <span class="priority priority-{{thing.priority}}"><h3>{{ thing.priority }}</h3></span> 
+                    <span class="name"><h3>{{ thing.name }}</h3></span>
                     <span class="delete">
-                        <a href="/delete/{{thing.id}}">x</a>
+                        <a href="/delete/{{thing.id}}"><h3>🗑</h3></a>
                     </span>
                    
                 </li>

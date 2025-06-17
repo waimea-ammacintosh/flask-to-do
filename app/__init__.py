@@ -27,7 +27,7 @@ register_error_handlers(app)
 def index():
     with connect_db() as client:
         # Get all the things from the DB
-        sql = "SELECT id, name, priority, complete FROM tasks ORDER BY priority DESC"
+        sql = "SELECT id, name, priority, complete, timestamp FROM tasks ORDER BY priority DESC"
         result = client.execute(sql)
         things = result.rows
 
