@@ -33,17 +33,50 @@
 #messages .message.success { color: var(--pico-ins-color); }
 #messages .message.error   { color: var(--pico-del-color); }
 
-li {
-    padding: 1rem;
+
+.task  {
     display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 1rem;
+    line-height: 1;
 }
 
-article #tasks {
-    display: flex;
-    justify-content: justify;
-}
-
-li.a { 
+.task .status { 
     align-self: flex-end;
-    padding: 1rem; 
  } 
+
+ .task .status a { 
+    text-decoration: none;
+ } 
+
+ .task .delete a {
+    text-decoration: none;
+ }
+
+.task .name {
+    color: var(--pico-primary--);
+    font-size: large;
+    font-weight: bold;
+    
+}
+
+.task .priority-5 {
+    color: var(--pico-color-red-500);
+}
+
+.task .priority-4 {
+    color: var(--pico-color-orange-500);
+}
+
+.task .priority-3 {
+    color: var(--pico-color-green-500);
+}
+
+.task .priority-2 {
+    color: var(--pico-color-blue-500);
+}
+
+.task .priority-1 {
+    color: var(--pico-color-purple-500);
+}

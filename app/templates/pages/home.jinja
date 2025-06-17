@@ -19,39 +19,44 @@
     <h1>Things...</h1>
 
 
-    <article id="tasks">
+    <article class="tasks" id="to-do-tasks">
 
         <ul>
             <h2>To-Do</h2>
             {% for thing in things %}
             {% if thing.complete == 0 %}
-
-                <li>
-                    <h3>{{ thing.priority }} | {{ thing.name }} | 
-                         <a href="/complete/{{thing.id}}">☐</a>
-                         </h3>
+                <li class="task">
+                    <span class="priority priority-{{thing.priority}}">{{ thing.priority }}</span> 
+                    <span class="name">{{ thing.name }}</span>
+                    <span class="status">
+                        <a href="/complete/{{thing.id}}">☐</a>
+                    </span>
                   
                 </li>
-
-            {% else %}
-                <p>None!</p>
-        </ul>
-        <ul>    
+            {% endif %}
             {% endfor %}
+        </ul>
+    </article>
+
+    <article class="tasks" id="complete-tasks">
+        <ul>    
+
             <h2>Done</h2>
             {% for thing in things %}
             {% if thing.complete %}
 
-                <li>
-                    <h3>{{ thing.priority }} | {{ thing.name }} | 
-                         <a href="/decomplete/{{thing.id}}">🗹</a>
-                    </h3>
-                    <a href="/delete/{{thing.id}}">⊗</a>
-                  
+                <li class="task">
+                    <span class="priority priority-{{thing.priority}}">{{ thing.priority }}</span> 
+                    <span class="name">{{ thing.name }}</span>
+                    <span class="status">
+                        <a href="/decomplete/{{thing.id}}">🗹</a>
+                    </span>
+                    <span class="delete">
+                        <a href="/delete/{{thing.id}}">x</a>
+                    </span>
+                   
                 </li>
-
-
-
+            {% endif%}
             {% endfor %}
         </ul>
 

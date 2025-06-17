@@ -64,12 +64,13 @@ def add_a_thing():
 # Route for completing a task
 #-----------------------------------------------------------
 @app.get("/complete/<int:id>")
-def complete_a_task():
+def complete_a_task(id):
 
 
     with connect_db() as client:
-        sql = "UPDATE tasks SET complete, 1 WHERE id = <int:id>"
-        client.execute(sql)
+        sql = "UPDATE tasks SET complete = 1 WHERE id = ?"
+        params = [id]
+        client.execute(sql, params)
 
         # Go back to the home page
         flash("Successfully updated task to complete")
@@ -79,12 +80,13 @@ def complete_a_task():
 # Route for decompleting a task
 #-----------------------------------------------------------
 @app.get("/decomplete/<int:id>")
-def decomplete_a_task():
+def decomplete_a_task(id):
 
 
     with connect_db() as client:
-        sql = "UPDATE tasks SET complete, 0 WHERE id = <int:id>"
-        client.execute(sql)
+        sql = "UPDATE tasks SET complete = 0 WHERE id = ?"
+        params = [id]
+        client.execute(sql, params)
 
         # Go back to the home page
         flash("Successfully updated task to incomplete")
@@ -96,13 +98,13 @@ def decomplete_a_task():
 # Route for deleting a thing, Id given in the route
 #-----------------------------------------------------------
 @app.get("/delete/<int:id>")
-def delete_a_thing(id):
+def delete_a_task(id):
     with connect_db() as client:
-        # Delete the thing from the DB
-        sql = "DELETE FROM things WHERE id=?"
+        # Delete the task from the DB
+        sql = "DELETE FROM tasks WHERE id=?"
         params = [id]
         client.execute(sql, params)
 
         # Go back to the home page
-        flash("Thing deleted", "success")
-        return redirect("/things")    
+        flash("Task deleted", "success")
+        return redirect("/")    
